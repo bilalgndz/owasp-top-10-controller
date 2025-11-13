@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zafiyet Tarayıcı - Web Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🔒 Gelişmiş Zafiyet Tarayıcı</h1>
+            <p class="subtitle">OWASP Top 10 Odaklı Web Güvenlik Tarayıcısı</p>
+        </header>
+
+        <div class="main-content">
+            <!-- Tarama Başlatma Bölümü -->
+            <section class="scan-section">
+                <h2>Yeni Tarama Başlat</h2>
+                <div class="form-group">
+                    <label for="config-select">Konfigürasyon Dosyası:</label>
+                    <select id="config-select" class="form-control">
+                        <option value="">Yükleniyor...</option>
+                    </select>
+                </div>
+                <button id="start-scan-btn" class="btn btn-primary" onclick="startScan()">
+                    🚀 Taramayı Başlat
+                </button>
+                <div id="scan-status" class="status-message"></div>
+            </section>
+
+            <!-- Özet İstatistikler -->
+            <section class="stats-section">
+                <h2>Tarama Özeti</h2>
+                <div class="stats-grid" id="stats-grid">
+                    <div class="stat-card critical">
+                        <div class="stat-label">Critical</div>
+                        <div class="stat-value" id="stat-critical">0</div>
+                    </div>
+                    <div class="stat-card high">
+                        <div class="stat-label">High</div>
+                        <div class="stat-value" id="stat-high">0</div>
+                    </div>
+                    <div class="stat-card medium">
+                        <div class="stat-label">Medium</div>
+                        <div class="stat-value" id="stat-medium">0</div>
+                    </div>
+                    <div class="stat-card low">
+                        <div class="stat-label">Low</div>
+                        <div class="stat-value" id="stat-low">0</div>
+                    </div>
+                    <div class="stat-card info">
+                        <div class="stat-label">Info</div>
+                        <div class="stat-value" id="stat-info">0</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Bulgular Listesi -->
+            <section class="findings-section">
+                <h2>Bulgular</h2>
+                <div class="findings-controls">
+                    <button class="btn btn-secondary" onclick="loadLatestReport()">📥 Son Raporu Yükle</button>
+                    <button class="btn btn-secondary" onclick="refreshReports()">🔄 Raporları Yenile</button>
+                </div>
+                <div id="findings-list" class="findings-list">
+                    <p class="empty-message">Henüz tarama yapılmadı. Yukarıdan bir tarama başlatın.</p>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
+

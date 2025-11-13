@@ -1,0 +1,39 @@
+{
+  "summary": {
+    "stats": {
+      "info": 0,
+      "low": 0,
+      "medium": 0,
+      "high": 0,
+      "critical": 1
+    },
+    "total_requests": 17,
+    "start_time": "2025-11-13T11:57:20.609097+00:00",
+    "end_time": "2025-11-13T11:57:39.082475+00:00",
+    "duration_seconds": 18.473378
+  },
+  "findings": [
+    {
+      "check_id": "SQLI-001",
+      "severity": "critical",
+      "endpoint": "http://localhost:8000/api/login",
+      "summary": "SQL Injection belirtisi tespit edildi",
+      "description": "Sunucu, enjekte edilen payload'a hatalı yanıt verdi. Sunucu hata verdi. Bu durum parametrik sorgular kullanılmadığına işaret eder.",
+      "evidence": {
+        "payload": "' OR 1=1 --",
+        "response_snippet": "{\"debug\":\"SELECT * FROM users WHERE username = '' OR 1=1 --' AND password = ''\",\"error\":\"SQL syntax error near '\"}\n"
+      },
+      "remediation": "Parametreleri parametrik sorgularla kullanın ve giriş doğrulaması uygulayın.",
+      "references": [
+        "https://owasp.org/www-community/attacks/SQL_Injection"
+      ]
+    }
+  ],
+  "logs": [
+    "POST /api/login -> SQLI-001 bulgu üretti.",
+    "POST /api/login -> XSS-001 hata: Client error '401 UNAUTHORIZED' for url 'http://localhost:8000/api/login?q=%3Csvg%2Fonload%3Dalert%28%27637d1b91917f%27%29%3E'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401",
+    "POST /api/login -> DATA-001 hata: Client error '401 UNAUTHORIZED' for url 'http://localhost:8000/api/login'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401",
+    "GET /search -> XSS-001 hata: Client error '404 NOT FOUND' for url 'http://localhost:8000/search?q=test'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404",
+    "GET /search -> DATA-001 hata: Client error '404 NOT FOUND' for url 'http://localhost:8000/search?q=test'\nFor more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404"
+  ]
+}

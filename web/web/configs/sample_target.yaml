@@ -1,0 +1,39 @@
+name: Demo Hedef
+default_checks:
+  - SQLI-001
+  - XSS-001
+  - DATA-001
+scope:
+  base_url: http://localhost:8000
+  endpoints:
+    - name: Login
+      method: POST
+      path: /api/login
+      enabled_checks:
+        - AUTH-001
+      json:
+        username: ""
+        password: ""
+    - name: Products
+      method: GET
+      path: /api/products
+      query:
+        search: test
+    - name: Comments
+      method: POST
+      path: /api/comments
+      json:
+        message: "merhaba"
+http:
+  timeout: 8
+  max_retries: 2
+headers:
+  - name: Accept
+    value: application/json
+credentials:
+  - username: admin
+    password: admin123
+  - username: test
+    password: test123
+rate_limit_per_minute: 60
+

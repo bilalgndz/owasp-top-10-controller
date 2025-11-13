@@ -1,0 +1,393 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 20px;
+    color: #333;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+}
+
+header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 30px;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 2.5em;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    opacity: 0.9;
+    font-size: 1.1em;
+}
+
+.main-content {
+    padding: 30px;
+}
+
+section {
+    margin-bottom: 40px;
+}
+
+h2 {
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 1.8em;
+    border-bottom: 3px solid #667eea;
+    padding-bottom: 10px;
+}
+
+/* Form Stilleri */
+.scan-section {
+    background: #f8f9fa;
+    padding: 25px;
+    border-radius: 8px;
+    border: 2px solid #e9ecef;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #555;
+}
+
+.form-control {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #ddd;
+    border-radius: 6px;
+    font-size: 1em;
+    transition: border-color 0.3s;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+.btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 6px;
+    font-size: 1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-right: 10px;
+    margin-top: 10px;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+.btn-secondary {
+    background: #6c757d;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background: #5a6268;
+    transform: translateY(-2px);
+}
+
+.status-message {
+    margin-top: 15px;
+    padding: 12px;
+    border-radius: 6px;
+    display: none;
+}
+
+.status-message.success {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+    display: block;
+}
+
+.status-message.error {
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    display: block;
+}
+
+.status-message.info {
+    background: #d1ecf1;
+    color: #0c5460;
+    border: 1px solid #bee5eb;
+    display: block;
+}
+
+/* İstatistik Kartları */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.stat-card {
+    background: white;
+    padding: 25px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+    border-left: 5px solid;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.stat-card.critical {
+    border-left-color: #dc3545;
+}
+
+.stat-card.high {
+    border-left-color: #fd7e14;
+}
+
+.stat-card.medium {
+    border-left-color: #ffc107;
+}
+
+.stat-card.low {
+    border-left-color: #17a2b8;
+}
+
+.stat-card.info {
+    border-left-color: #6c757d;
+}
+
+.stat-label {
+    font-size: 0.9em;
+    color: #666;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.stat-value {
+    font-size: 2.5em;
+    font-weight: bold;
+    color: #333;
+}
+
+.stat-card.critical .stat-value {
+    color: #dc3545;
+}
+
+.stat-card.high .stat-value {
+    color: #fd7e14;
+}
+
+.stat-card.medium .stat-value {
+    color: #ffc107;
+}
+
+.stat-card.low .stat-value {
+    color: #17a2b8;
+}
+
+.stat-card.info .stat-value {
+    color: #6c757d;
+}
+
+/* Bulgular Listesi */
+.findings-controls {
+    margin-bottom: 20px;
+}
+
+.findings-list {
+    margin-top: 20px;
+}
+
+.finding-card {
+    background: white;
+    border: 2px solid #e9ecef;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 15px;
+    transition: all 0.3s;
+    border-left: 5px solid;
+}
+
+.finding-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transform: translateX(5px);
+}
+
+.finding-card.critical {
+    border-left-color: #dc3545;
+    background: #fff5f5;
+}
+
+.finding-card.high {
+    border-left-color: #fd7e14;
+    background: #fff8f0;
+}
+
+.finding-card.medium {
+    border-left-color: #ffc107;
+    background: #fffef5;
+}
+
+.finding-card.low {
+    border-left-color: #17a2b8;
+    background: #f0f9ff;
+}
+
+.finding-card.info {
+    border-left-color: #6c757d;
+    background: #f8f9fa;
+}
+
+.finding-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.finding-severity {
+    display: inline-block;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.85em;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.finding-severity.critical {
+    background: #dc3545;
+    color: white;
+}
+
+.finding-severity.high {
+    background: #fd7e14;
+    color: white;
+}
+
+.finding-severity.medium {
+    background: #ffc107;
+    color: #333;
+}
+
+.finding-severity.low {
+    background: #17a2b8;
+    color: white;
+}
+
+.finding-severity.info {
+    background: #6c757d;
+    color: white;
+}
+
+.finding-endpoint {
+    font-family: 'Courier New', monospace;
+    color: #667eea;
+    font-weight: 600;
+    word-break: break-all;
+}
+
+.finding-summary {
+    font-size: 1.1em;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.finding-description {
+    color: #666;
+    margin-bottom: 15px;
+    line-height: 1.6;
+}
+
+.finding-evidence {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 6px;
+    margin-top: 10px;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9em;
+    overflow-x: auto;
+}
+
+.finding-evidence pre {
+    margin: 0;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+.finding-remediation {
+    margin-top: 15px;
+    padding: 12px;
+    background: #e7f3ff;
+    border-left: 4px solid #2196F3;
+    border-radius: 4px;
+}
+
+.finding-remediation strong {
+    color: #1976D2;
+}
+
+.empty-message {
+    text-align: center;
+    color: #999;
+    padding: 40px;
+    font-size: 1.1em;
+}
+
+.loading {
+    text-align: center;
+    padding: 40px;
+    color: #667eea;
+    font-size: 1.2em;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.spinner {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #667eea;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin: 20px auto;
+}
+

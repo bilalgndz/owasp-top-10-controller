@@ -1,0 +1,63 @@
+name: Örnek Açıklama
+# Bu dosya, konfigürasyonun nasıl çalıştığını gösterir
+
+scope:
+  # 1. HANGİ SİTEYE SALDIRI YAPILACAK?
+  # base_url: hedef web sitesinin adresi
+  base_url: http://localhost:8000
+  # Örnekler:
+  # base_url: https://example.com
+  # base_url: http://192.168.1.100:3000
+  # base_url: https://test-site.com
+
+  # 2. O SİTEDEKİ HANGİ SAYFALARA/API'LERE SALDIRI YAPILACAK?
+  endpoints:
+    # ÖRNEK 1: Login sayfasına SQL Injection saldırısı
+    - name: Login Endpoint
+      method: POST
+      path: /api/login
+      # Bu endpoint'e SQLI-001 kontrolü uygulanacak
+      # Tarayıcı şu URL'e saldırı yapacak: http://localhost:8000/api/login
+      # Göndereceği payload: username parametresine ' OR 1=1 -- gibi SQL injection payload'ları
+      json:
+        username: ""  # Buraya SQL injection payload'ları enjekte edilecek
+        password: ""
+
+    # ÖRNEK 2: Arama sayfasına XSS saldırısı
+    - name: Search Page
+      method: GET
+      path: /search
+      # Bu endpoint'e XSS-001 kontrolü uygulanacak
+      # Tarayıcı şu URL'e saldırı yapacak: http://localhost:8000/search?q=<svg/onload=alert('token')>
+      query:
+        q: test  # Buraya XSS payload'ları enjekte edilecek
+
+    # ÖRNEK 3: Ürün listesi sayfasına SQL Injection
+    - name: Products List
+      method: GET
+      path: /api/products
+      query:
+        category: electronics  # Buraya SQL injection payload'ları enjekte edilecek
+        # Tarayıcı şu URL'e saldırı yapacak: 
+        # http://localhost:8000/api/products?category=' OR 1=1 --
+
+# 3. HANGİ KONTROLLER UYGULANACAK?
+default_checks:
+  - SQLI-001  # SQL Injection kontrolü
+  - XSS-001   # XSS kontrolü
+  - DATA-001  # Hassas veri kontrolü
+
+# 4. HTTP AYARLARI
+http:
+  timeout: 8
+  max_retries: 2
+
+# 5. KİMLİK BİLGİLERİ (Broken Auth kontrolü için)
+credentials:
+  - username: admin
+    password: admin123
+  - username: test
+    password: test123
+
+rate_limit_per_minute: 60
+

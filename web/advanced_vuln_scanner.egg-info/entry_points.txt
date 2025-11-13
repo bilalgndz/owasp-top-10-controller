@@ -1,0 +1,2 @@
+[console_scripts]
+vuln-scanner = scanner.main:app
